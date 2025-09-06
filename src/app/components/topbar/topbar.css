@@ -1,0 +1,103 @@
+/* TopBar Principal */
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: 60px;
+  border-bottom: 1px solid var(--p-surface-border);
+  background: var(--p-surface-card);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.topbar :deep(.p-toolbar) {
+  padding: 0 1rem;
+  height: 100%;
+  border: none;
+  background: transparent;
+}
+
+/* Sección izquierda */
+.topbar-start {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  height: 100%;
+}
+
+/* Botón de menú */
+.menu-toggle-btn {
+  margin-right: 0.5rem;
+}
+
+.menu-toggle-btn :deep(.p-button) {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+/* Logo */
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo-placeholder {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.logo-placeholder:hover {
+  background: var(--p-surface-hover);
+  cursor: pointer;
+}
+
+.logo-icon {
+  font-size: 1.5rem;
+  color: var(--p-primary-color);
+}
+
+.logo-text {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--p-text-color);
+  white-space: nowrap;
+}
+
+/* Sección derecha */
+.topbar-end {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.user-btn :deep(.p-button) {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .topbar :deep(.p-toolbar) {
+    padding: 0 0.75rem;
+  }
+  
+  .logo-text {
+    display: none;
+  }
+  
+  .topbar-start {
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .topbar :deep(.p-toolbar) {
+    padding: 0 0.5rem;
+  }
+}

@@ -1,0 +1,41 @@
+/* Layout principal de la aplicación */
+.app-layout {
+  display: flex;
+  min-height: calc(100vh - 60px);
+  margin-top: 60px; /* Altura del topbar */
+}
+
+/* Contenido principal */
+.main-content {
+  flex: 1;
+  min-height: calc(100vh - 60px);
+  background: var(--p-surface-ground);
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.content-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Reset de márgenes para h1 */
+.content-container h1 {
+  margin-top: 0;
+  color: var(--p-text-color);
+}
+
+/* Layout con sidebar activo en escritorio */
+@media (min-width: 1024px) {
+  .sidebar-active .main-content {
+    margin-left: 280px; /* Ancho del sidebar */
+  }
+}
+
+/* En móviles el sidebar es overlay, no cambia el layout */
+@media (max-width: 1023px) {
+  .main-content {
+    margin-left: 0 !important;
+  }
+}
+

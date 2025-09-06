@@ -1,0 +1,129 @@
+<p-toolbar class="mb-6">
+    <ng-template #start>
+        <p-button label="New" icon="pi pi-plus" class="mr-2" (click)="openNew()" />
+        <p-button severity="danger" label="Delete" icon="pi pi-trash" outlined (click)="deleteSelectedAccountTypes()" [disabled]="!selectedAccountTypes || !selectedAccountTypes.length" />
+    </ng-template>
+
+    <ng-template #end>
+        <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" auto customUpload class="mr-2 inline-block" [chooseButtonProps]="{ severity: 'secondary' }" />
+        <p-button label="Export" icon="pi pi-upload" severity="secondary" (click)="exportCSV()" />
+    </ng-template>
+</p-toolbar>
+
+<p-table
+    #dt
+    [value]="accountTypeList"
+    [rows]="10"
+    [paginator]="true"
+    [globalFilterFields]="['id', 'description']"
+    [tableStyle]="{ 'min-width': '75rem' }"
+    [(selection)]="selectedAccountTypes"
+    [rowHover]="true"
+    dataKey="id"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [showCurrentPageReport]="true"
+>
+    <ng-template #caption>
+        <div class="flex items-center justify-between">
+            <h5 class="m-0">Manage Account Types</h5>
+            <p-iconfield>
+                <p-inputicon class="pi pi-search" />
+                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />
+            </p-iconfield>
+        </div>
+    </ng-template>
+    <ng-template #header>
+        <tr>
+            <th style="width: 3rem">
+                <p-tableHeaderCheckbox />
+            </th>
+            <th style="min-width: 16rem">Id</th>
+            <th pSortableColumn="description" style="min-width:16rem">
+                <div class="flex items-center gap-2">
+                    Description
+                    <p-sortIcon field="description" />
+                </div>
+            </th>
+            <th pSortableColumn="inventoryStatus" style="min-width: 12rem">
+                <div class="flex items-center gap-2">
+                    Status
+                    <p-sortIcon field="inventoryStatus" />
+                </div>
+            </th>
+            <th style="min-width: 12rem"></th>
+        </tr>
+    </ng-template>
+    <ng-template #body let-accountType>
+        <tr>
+            <td style="width: 3rem">
+                <p-tableCheckbox [value]="accountType" />
+            </td>
+            <td style="min-width: 12rem">{{ accountType.id }}</td>
+            <td style="min-width: 16rem">{{ accountType.description }}</td>
+            <td>
+                <p-tag [value]="accountType.status" [severity]="getSeverity(accountType.status || '')" />
+            </td>
+            <td>
+                <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true" (click)="editAccountType(accountType)" />
+                <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true" (click)="deleteAccountType(accountType)" />
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<p-dialog [(visible)]="AccountTypeDialog" [style]="{ width: '450px' }" header="Account Type Details" [modal]="true">
+    <ng-template #content>
+        <div class="flex flex-col gap-6">
+            <!-- <img [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + accountType.image" [alt]="accountType.image" class="block m-auto pb-4" *ngIf="accountType.image" /> -->
+            <div>
+                <label for="name" class="block font-bold mb-3">Name</label>
+                <input type="text" pInputText id="name" [(ngModel)]="accountType.id" required autofocus fluid />
+                <small class="text-red-500" *ngIf="submitted && !accountType.description">Name is required.</small>
+            </div>
+            <div>
+                <label for="description" class="block font-bold mb-3">Description</label>
+                <textarea id="description" pTextarea [(ngModel)]="accountType.description" required rows="3" cols="20" fluid></textarea>
+            </div>
+
+            <div>
+                <span class="block font-bold mb-4">Category</span>
+                <div class="grid grid-cols-12 gap-4">
+                    <div class="flex items-center gap-2 col-span-6">
+                        <p-radiobutton id="category1" name="category" value="Accessories" [(ngModel)]="accountType.id" />
+                        <label for="category1">Accessories</label>
+                    </div>
+                    <div class="flex items-center gap-2 col-span-6">
+                        <p-radiobutton id="category2" name="category" value="Clothing" [(ngModel)]="accountType.description" />
+                        <label for="category2">Clothing</label>
+                    </div>
+                    <div class="flex items-center gap-2 col-span-6">
+                        <p-radiobutton id="category3" name="category" value="Electronics" [(ngModel)]="accountType.description" />
+                        <label for="category3">Electronics</label>
+                    </div>
+                    <div class="flex items-center gap-2 col-span-6">
+                        <p-radiobutton id="category4" name="category" value="Fitness" [(ngModel)]="accountType.description" />
+                        <label for="category4">Fitness</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-12 gap-4">
+                <div class="col-span-6">
+                    <label for="price" class="block font-bold mb-3">Price</label>
+                    <p-inputnumber id="price" [(ngModel)]="accountType.description" mode="currency" currency="USD" locale="en-US" fluid />
+                </div>
+                <div class="col-span-6">
+                    <label for="quantity" class="block font-bold mb-3">Quantity</label>
+                    <p-inputnumber id="quantity" [(ngModel)]="accountType.description" fluid />
+                </div>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template #footer>
+        <p-button label="Cancel" icon="pi pi-times" text (click)="hideDialog()" />
+        <p-button label="Save" icon="pi pi-check" (click)="saveAccountType()" />
+    </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{ width: '450px' }" />

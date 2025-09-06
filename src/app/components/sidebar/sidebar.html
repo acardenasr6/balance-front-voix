@@ -1,0 +1,29 @@
+<div class="sidebar" [class.sidebar-visible]="isVisible()">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">
+      <i class="pi pi-chart-bar sidebar-logo-icon"></i>
+      <span class="sidebar-logo-text">Balance Voix</span>
+    </div>
+  </div>
+  
+  <div class="sidebar-content">
+    <p-menu 
+      [model]="menuItems" 
+      [popup]="false"
+      class="sidebar-menu">
+      <!-- Template para submenu headers -->
+      <ng-template pTemplate="submenuheader" let-item>
+        <div class="submenu-header">
+          <i [class]="item.icon" *ngIf="item.icon"></i>
+          <span class="submenu-title">{{ item.label }}</span>
+        </div>
+      </ng-template>
+    </p-menu>
+  </div>
+</div>
+
+<!-- Overlay para cerrar en móviles -->
+<div class="sidebar-overlay" 
+     [class.sidebar-overlay-visible]="isVisible()"
+     (click)="onOverlayClick()">
+</div>
