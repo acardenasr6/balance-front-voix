@@ -40,7 +40,7 @@ export class Sidebar implements OnInit {
           {
             label: 'Account',
             icon: 'pi pi-list',
-            routerLink: '/accounts'
+            routerLink: '/accounts/crud'
           },
           {
             label: 'Account Types',
@@ -56,6 +56,11 @@ export class Sidebar implements OnInit {
             label: 'Movements',
             icon: 'pi pi-credit-card',
             routerLink: '/accounts/transactions'
+          },
+          {
+            label: 'Movement Type',
+            icon: 'pi pi-credit-card',
+            routerLink: '/accounts/movement/types'
           }
         ]
       },

@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { AccountTypeComponent } from './components/account-type/account-type.component';
 import { AccountComponent } from './components/account.component/account.component';
 import { BalanceOverview } from './components/balance-overview/balance-overview';
+import { MovementTypeComponent } from './components/movement-type.component/movement-type.component';
 
 export const routes: Routes = [
   {
@@ -13,7 +14,7 @@ export const routes: Routes = [
     component: AccountTypeComponent // Cambia por el componente real de Overview
   },
   {
-    path: 'accounts',
+    path: 'accounts/crud',
     component: AccountComponent 
   },
   {
@@ -25,8 +26,8 @@ export const routes: Routes = [
     component: AccountTypeComponent // Cambia por el componente real de Transactions
   },
   {
-    path: 'reports/financial',
-    component: AccountTypeComponent // Cambia por el componente real de Financial Reports
+    path: 'accounts/movement/types',
+    component: MovementTypeComponent // Cambia por el componente real de Financial Reports
   },
   {
     path: 'reports/export',
