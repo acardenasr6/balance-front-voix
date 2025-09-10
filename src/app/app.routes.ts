@@ -3,6 +3,7 @@ import { AccountTypeComponent } from './components/account-type/account-type.com
 import { AccountComponent } from './components/account.component/account.component';
 import { BalanceOverview } from './components/balance-overview/balance-overview';
 import { MovementTypeComponent } from './components/movement-type.component/movement-type.component';
+import { MovementComponent } from './components/movement.component/movement.component';
 
 export const routes: Routes = [
   {
@@ -28,6 +29,10 @@ export const routes: Routes = [
   {
     path: 'accounts/movement/types',
     component: MovementTypeComponent // Cambia por el componente real de Financial Reports
+  },
+  {
+    path: 'accounts/movement',
+    component: MovementComponent // Cambia por el componente real de Overview
   },
   {
     path: 'reports/export',

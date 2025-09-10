@@ -1,1 +1,62 @@
-<p>movement-type.component works!</p>
+
+
+<p-table
+    #dt
+    [value]="movementTypeList"
+    [rows]="10"
+    [paginator]="true"
+    [globalFilterFields]="['id', 'description']"
+    [tableStyle]="{ 'min-width': '75rem' }"
+    [(selection)]="selectedMovementTypes"
+    [rowHover]="true"
+    dataKey="id"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [showCurrentPageReport]="true"
+>
+    <ng-template #caption>
+        <div class="flex items-center justify-between">
+            <h5 class="m-0">Manage Movement Types</h5>
+            <p-iconfield>
+                <p-inputicon class="pi pi-search" />
+                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />
+            </p-iconfield>
+        </div>
+    </ng-template>
+    <ng-template #header>
+        <tr>
+            <th style="width: 3rem">
+                <p-tableHeaderCheckbox />
+            </th>
+            <th style="min-width: 16rem">Id</th>
+            <th pSortableColumn="description" style="min-width:16rem">
+                <div class="flex items-center gap-2">
+                    Description
+                    <p-sortIcon field="description" />
+                </div>
+            </th>
+            <th pSortableColumn="inventoryStatus" style="min-width: 12rem">
+                <div class="flex items-center gap-2">
+                    Status
+                    <p-sortIcon field="inventoryStatus" />
+                </div>
+            </th>
+            <th style="min-width: 12rem"></th>
+        </tr>
+    </ng-template>
+    <ng-template #body let-movementType>
+        <tr>
+            <td style="width: 3rem">
+                <p-tableCheckbox [value]="movementType" />
+            </td>
+            <td style="min-width: 12rem">{{ movementType.id }}</td>
+            <td style="min-width: 16rem">{{ movementType.description }}</td>
+            <td>
+                <p-tag [value]="movementType.status" [severity]="getSeverity(movementType.status || '')" />
+            </td>
+            <td>
+                <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true" (click)="editMovementType(movementType)" />
+                <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true" (click)="deleteMovementType(movementType)" />
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

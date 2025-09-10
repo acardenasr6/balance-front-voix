@@ -53,15 +53,16 @@ export class Sidebar implements OnInit {
             routerLink: '/accounts/balance'
           },
           {
-            label: 'Movements',
+            label: 'Movement',
             icon: 'pi pi-credit-card',
-            routerLink: '/accounts/transactions'
+            routerLink: '/accounts/movement'
           },
           {
             label: 'Movement Type',
             icon: 'pi pi-credit-card',
             routerLink: '/accounts/movement/types'
           }
+          
         ]
       },
     ];
